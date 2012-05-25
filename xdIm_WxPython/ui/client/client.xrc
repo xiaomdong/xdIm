@@ -1,0 +1,173 @@
+<?xml version="1.0" ?>
+<resource>
+  <object class="wxFrame" name="clientFrame">
+    <object class="wxPanel" name="mainPanel">
+      <object class="wxBoxSizer">
+        <orient>wxVERTICAL</orient>
+        <object class="sizeritem">
+          <object class="wxPanel" name="serDataPanel">
+            <object class="wxStaticBoxSizer">
+              <orient>wxHORIZONTAL</orient>
+              <object class="sizeritem">
+                <object class="wxBoxSizer">
+                  <object class="sizeritem">
+                    <object class="wxStaticText" name="serverText">
+                      <label>Server</label>
+                    </object>
+                    <option>0</option>
+                    <flag>wxEXPAND</flag>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="serverTextCtrl"/>
+                    <option>1</option>
+                    <flag>wxEXPAND</flag>
+                  </object>
+                  <orient>wxVERTICAL</orient>
+                </object>
+              </object>
+              <object class="sizeritem">
+                <object class="wxBoxSizer">
+                  <object class="sizeritem">
+                    <object class="wxStaticText" name="userText">
+                      <label>User</label>
+                    </object>
+                    <option>0</option>
+                    <flag>wxEXPAND</flag>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="userTextCtrl"/>
+                    <option>1</option>
+                    <flag>wxEXPAND</flag>
+                  </object>
+                  <orient>wxVERTICAL</orient>
+                </object>
+              </object>
+              <object class="sizeritem">
+                <object class="wxBoxSizer">
+                  <object class="sizeritem">
+                    <object class="wxStaticText" name="passwordText">
+                      <label>Password</label>
+                    </object>
+                    <option>0</option>
+                    <flag>wxEXPAND</flag>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="passwordTextCtrl">
+                      <style>wxTE_PASSWORD</style>
+                    </object>
+                    <option>1</option>
+                    <flag>wxEXPAND</flag>
+                  </object>
+                  <orient>wxVERTICAL</orient>
+                </object>
+              </object>
+            </object>
+          </object>
+          <option>0</option>
+          <flag>wxEXPAND</flag>
+        </object>
+        <object class="sizeritem">
+          <object class="wxPanel" name="receMesPanel">
+            <object class="wxBoxSizer">
+              <orient>wxVERTICAL</orient>
+              <object class="sizeritem">
+                <object class="wxTextCtrl" name="receMessageText">
+                  <style>wxTE_MULTILINE</style>
+                </object>
+                <option>-1</option>
+                <flag>wxEXPAND</flag>
+              </object>
+            </object>
+            <size>250,100</size>
+            <bg>#515CAE</bg>
+          </object>
+          <option>1</option>
+          <flag>wxEXPAND</flag>
+        </object>
+        <object class="sizeritem">
+          <object class="wxPanel" name="sendMesPanel">
+            <object class="wxBoxSizer">
+              <orient>wxVERTICAL</orient>
+              <object class="sizeritem">
+                <object class="wxToolBar" name="sendMesTool">
+                  <object class="tool" name="copyTool">
+                    <bitmap stock_id="wxART_COPY"/>
+                    <label>copy</label>
+                    <XRCED>
+                      <events>EVT_TOOL</events>
+                    </XRCED>
+                  </object>
+                  <object class="tool" name="pasteTool">
+                    <bitmap stock_id="wxART_PASTE"/>
+                    <label>paste</label>
+                    <XRCED>
+                      <events>EVT_TOOL</events>
+                    </XRCED>
+                  </object>
+                  <object class="tool" name="sendTool">
+                    <bitmap stock_id="wxART_QUIT"/>
+                    <label>send</label>
+                    <XRCED>
+                      <events>EVT_TOOL</events>
+                    </XRCED>
+                  </object>
+                  <object class="wxStaticText" name="friendText">
+                    <label> friend  </label>
+                  </object>
+                  <object class="wxTextCtrl" name="friendTextCtrl"/>
+                  <style>wxTB_FLAT|wxTB_TEXT|wxTB_HORZ_TEXT</style>
+                </object>
+                <option>0</option>
+                <flag>wxEXPAND</flag>
+              </object>
+              <object class="sizeritem">
+                <object class="wxTextCtrl" name="sendMessageText">
+                  <style>wxTE_MULTILINE</style>
+                </object>
+                <option>1</option>
+                <flag>wxEXPAND</flag>
+              </object>
+            </object>
+            <size>250,100</size>
+            <bg>#008000</bg>
+          </object>
+          <option>2</option>
+          <flag>wxEXPAND</flag>
+        </object>
+      </object>
+      <size>350,450</size>
+    </object>
+    <size>350,450</size>
+    <title>client</title>
+    <object class="wxToolBar" name="mainToolBar">
+      <object class="tool" name="connectTool">
+        <bitmap stock_id="wxART_GO_UP"/>
+        <label>login</label>
+        <XRCED>
+          <events>EVT_TOOL</events>
+        </XRCED>
+      </object>
+      <bitmapsize>20,20</bitmapsize>
+      <separation>0</separation>
+      <style>wxTB_FLAT|wxTB_TEXT|wxTB_HORZ_TEXT</style>
+      <object class="tool" name="loseconnectTool">
+        <bitmap stock_id="wxART_GO_DOWN"/>
+        <label>logout</label>
+        <XRCED>
+          <events>EVT_TOOL</events>
+        </XRCED>
+      </object>
+      <object class="tool" name="closeTool">
+        <bitmap stock_id="wxART_QUIT"/>
+        <label>close</label>
+        <XRCED>
+          <events>EVT_TOOL</events>
+        </XRCED>
+      </object>
+      <object class="wxStaticText" name="statusText">
+        <label> not connected server</label>
+        <fg>#000080</fg>
+      </object>
+    </object>
+  </object>
+</resource>

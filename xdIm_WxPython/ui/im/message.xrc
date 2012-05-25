@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<resource>
+  <object class="wxFrame" name="clientFrame">
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxPanel" name="mainPanel">
+          <object class="wxBoxSizer">
+            <orient>wxVERTICAL</orient>
+            <object class="sizeritem">
+              <object class="wxPanel" name="receMesPanel">
+                <object class="wxBoxSizer">
+                  <orient>wxVERTICAL</orient>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="receMessageText">
+                      <style>wxTE_MULTILINE</style>
+                    </object>
+                    <option>-1</option>
+                    <flag>wxEXPAND</flag>
+                  </object>
+                </object>
+                <size>250,100</size>
+                <bg>#515CAE</bg>
+              </object>
+              <option>1</option>
+              <flag>wxEXPAND</flag>
+            </object>
+            <object class="sizeritem">
+              <object class="wxPanel" name="sendMesPanel">
+                <object class="wxBoxSizer">
+                  <orient>wxVERTICAL</orient>
+                  <object class="sizeritem">
+                    <object class="wxToolBar" name="sendMesTool">
+                      <object class="tool" name="copyTool">
+                        <bitmap stock_id="wxART_COPY"/>
+                        <label>copy</label>
+                        <XRCED>
+                          <events>EVT_TOOL</events>
+                        </XRCED>
+                      </object>
+                      <object class="tool" name="pasteTool">
+                        <bitmap stock_id="wxART_PASTE"/>
+                        <label>paste</label>
+                        <XRCED>
+                          <events>EVT_TOOL</events>
+                        </XRCED>
+                      </object>
+                      <object class="tool" name="sendTool">
+                        <bitmap stock_id="wxART_QUIT"/>
+                        <label>send</label>
+                        <XRCED>
+                          <events>EVT_TOOL</events>
+                        </XRCED>
+                      </object>
+                      <style>wxTB_FLAT|wxTB_TEXT|wxTB_HORZ_TEXT</style>
+                    </object>
+                    <option>0</option>
+                    <flag>wxEXPAND</flag>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="sendMessageText">
+                      <style>wxTE_MULTILINE</style>
+                    </object>
+                    <option>1</option>
+                    <flag>wxEXPAND</flag>
+                  </object>
+                </object>
+                <size>250,100</size>
+                <bg>#008000</bg>
+              </object>
+              <option>1</option>
+              <flag>wxEXPAND</flag>
+            </object>
+          </object>
+        </object>
+        <option>1</option>
+        <flag>wxEXPAND</flag>
+        <minsize>350,450</minsize>
+      </object>
+    </object>
+    <title>client</title>
+    <XRCED>
+      <events>EVT_CLOSE</events>
+    </XRCED>
+  </object>
+</resource>

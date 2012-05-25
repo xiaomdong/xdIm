@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-01-19 16:17+ÖÐ¹ú±ê×¼Ê±¼ä\n"
+"PO-Revision-Date: 2011-01-19 16:18+0800\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+#: im_xrc.py:164
+msgid "login"
+msgstr ""
+
+#: im_xrc.py:165
+msgid "logout"
+msgstr ""
+
+#: im_xrc.py:166
+msgid "File"
+msgstr ""
+
+#: im_xrc.py:167
+msgid "operate"
+msgstr ""
+
+#: im_xrc.py:168
+msgid "add Friend"
+msgstr ""
+
+#: im_xrc.py:169
+msgid "delete Friend"
+msgstr ""
+
+#: im_xrc.py:170
+msgid "help"
+msgstr ""
+
+#: im_xrc.py:171
+msgid "about"
+msgstr ""
+
+#: im_xrc.py:172
+msgid "Im"
+msgstr ""
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/userSchema" xmlns:tns="http://www.example.org/userSchema" elementFormDefault="qualified">
+
+
+    <complexType name="friendlist">
+    	<sequence>
+    		<element name="name" type="string" minOccurs="0" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="user">
+    	<sequence>
+    		<element name="name" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="password" type="string" minOccurs="1" maxOccurs="1"></element>
+    		<element name="friends" type="tns:friendlist" minOccurs="0" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    
+
+    <complexType name="userlist">
+    	<sequence>
+    		<element name="user" type="tns:user" minOccurs="0" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="userlist" type="tns:userlist"></element>
+</schema>

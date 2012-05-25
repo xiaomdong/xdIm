@@ -1,0 +1,111 @@
+<?xml version="1.0" ?>
+<resource>
+  <object class="wxFrame" name="serverFrame">
+    <object class="wxPanel" name="mainPanel">
+      <object class="wxBoxSizer">
+        <orient>wxVERTICAL</orient>
+        <object class="sizeritem">
+          <object class="wxPanel" name="receMesPanel">
+            <object class="wxBoxSizer">
+              <orient>wxVERTICAL</orient>
+              <object class="sizeritem">
+                <object class="wxTextCtrl" name="receMessageText">
+                  <style>wxTE_MULTILINE</style>
+                </object>
+                <option>-1</option>
+                <flag>wxEXPAND</flag>
+              </object>
+            </object>
+            <size>250,100</size>
+            <bg>#515CAE</bg>
+          </object>
+          <option>0</option>
+          <flag>wxEXPAND</flag>
+          <minsize>250,150</minsize>
+        </object>
+        <object class="sizeritem">
+          <object class="wxPanel" name="sendMesPanel">
+            <object class="wxBoxSizer">
+              <orient>wxVERTICAL</orient>
+              <object class="sizeritem">
+                <object class="wxToolBar" name="sendMesTool">
+                  <object class="tool" name="copyTool">
+                    <bitmap stock_id="wxART_COPY"/>
+                    <label>copy</label>
+                    <XRCED>
+                      <events>EVT_TOOL</events>
+                    </XRCED>
+                  </object>
+                  <object class="tool" name="pasteTool">
+                    <bitmap stock_id="wxART_PASTE"/>
+                    <label>paste</label>
+                    <XRCED>
+                      <events>EVT_TOOL</events>
+                    </XRCED>
+                  </object>
+                  <object class="tool" name="sendTool">
+                    <bitmap stock_id="wxART_QUIT"/>
+                    <label>send</label>
+                    <XRCED>
+                      <events>EVT_TOOL</events>
+                    </XRCED>
+                  </object>
+                  <style>wxTB_FLAT|wxTB_TEXT|wxTB_HORZ_TEXT</style>
+                </object>
+                <option>0</option>
+                <flag>wxEXPAND</flag>
+              </object>
+              <object class="sizeritem">
+                <object class="wxTextCtrl" name="sendMessageText">
+                  <style>wxTE_MULTILINE</style>
+                </object>
+                <option>1</option>
+                <flag>wxEXPAND</flag>
+              </object>
+            </object>
+            <size>250,100</size>
+            <bg>#008000</bg>
+          </object>
+          <option>1</option>
+          <flag>wxEXPAND</flag>
+          <minsize>130,150</minsize>
+        </object>
+      </object>
+      <size>250,450</size>
+      <bg>#000000</bg>
+    </object>
+    <object class="wxToolBar" name="mainToolBar">
+      <object class="tool" name="startTool">
+        <bitmap stock_id="wxART_GO_UP"/>
+        <label>start</label>
+        <XRCED>
+          <events>EVT_TOOL</events>
+        </XRCED>
+      </object>
+      <bitmapsize>20,20</bitmapsize>
+      <separation>0</separation>
+      <style>wxTB_FLAT|wxTB_TEXT|wxTB_HORZ_TEXT</style>
+      <object class="tool" name="stopTool">
+        <bitmap stock_id="wxART_GO_DOWN"/>
+        <label>stop</label>
+        <XRCED>
+          <events>EVT_TOOL</events>
+        </XRCED>
+      </object>
+      <object class="tool" name="closeTool">
+        <bitmap stock_id="wxART_QUIT"/>
+        <label>close</label>
+        <XRCED>
+          <events>EVT_TOOL</events>
+        </XRCED>
+      </object>
+      <object class="wxStaticText" name="statusText">
+        <label>  server stop</label>
+        <fg>#000080</fg>
+      </object>
+    </object>
+    <size>250,450</size>
+    <title>server</title>
+    <bg>#FFFFFF</bg>
+  </object>
+</resource>

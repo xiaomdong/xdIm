@@ -1,0 +1,255 @@
+<?xml version="1.0" ?>
+<resource>
+  <object class="wxFrame" name="serverManagerFrame">
+    <object class="wxPanel" name="mainPanel">
+      <object class="wxBoxSizer">
+        <object class="sizeritem">
+          <object class="wxNotebook" name="mainNoteBook">
+            <object class="notebookpage">
+              <object class="wxPanel" name="serverControlPanel">
+                <object class="wxGridBagSizer">
+                  <object class="sizeritem">
+                    <object class="wxComboBox" name="languageComboBox">
+                      <content>
+                        <item>Chinese</item>
+                        <item>English</item>
+                      </content>
+                      <value>Chinese</value>
+                      <XRCED>
+                        <events>EVT_COMBOBOX</events>
+                      </XRCED>
+                    </object>
+                    <flag>wxALIGN_CENTRE</flag>
+                    <cellpos>1,1</cellpos>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxToggleButton" name="serverStartButton">
+                      <label>Start Server</label>
+                      <XRCED>
+                        <events>EVT_TOGGLEBUTTON</events>
+                      </XRCED>
+                    </object>
+                    <flag>wxALIGN_CENTRE</flag>
+                    <cellpos>2,1</cellpos>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxToggleButton" name="serverStopButton">
+                      <label>Stop Server</label>
+                      <XRCED>
+                        <events>EVT_TOGGLEBUTTON</events>
+                      </XRCED>
+                    </object>
+                    <flag>wxALIGN_CENTRE</flag>
+                    <cellpos>3,1</cellpos>
+                  </object>
+                  <growablecols>1</growablecols>
+                  <growablerows>1,2,3</growablerows>
+                </object>
+              </object>
+              <label>Server Control</label>
+            </object>
+            <object class="notebookpage">
+              <object class="wxPanel" name="userControlPanel">
+                <object class="wxBoxSizer">
+                  <orient>wxVERTICAL</orient>
+                  <object class="sizeritem">
+                    <object class="wxPanel" name="textUserPanel">
+                      <object class="wxGridBagSizer">
+                        <object class="sizeritem">
+                          <object class="wxRadioButton" name="textUserRadioButton">
+                            <label>use txt file control user</label>
+                            <XRCED>
+                              <events>EVT_RADIOBUTTON</events>
+                            </XRCED>
+                          </object>
+                          <option>1</option>
+                          <flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTRE_VERTICAL</flag>
+                          <border>5</border>
+                          <cellpos>1,2</cellpos>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="textUserButton">
+                            <label>Open txt</label>
+                            <XRCED>
+                              <events>EVT_BUTTON</events>
+                            </XRCED>
+                          </object>
+                          <option>1</option>
+                          <flag>wxALL|wxALIGN_CENTRE</flag>
+                          <border>10</border>
+                          <cellpos>1,3</cellpos>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxRadioButton" name="mysqlUserRadioButton">
+                            <label>use mysql database control user</label>
+                            <XRCED>
+                              <events>EVT_RADIOBUTTON</events>
+                            </XRCED>
+                          </object>
+                          <option>1</option>
+                          <flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTRE_VERTICAL</flag>
+                          <border>5</border>
+                          <cellpos>2,2</cellpos>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="mysqlUserButton">
+                            <label>Control</label>
+                            <XRCED>
+                              <events>EVT_BUTTON</events>
+                            </XRCED>
+                          </object>
+                          <option>1</option>
+                          <flag>wxALL|wxALIGN_CENTRE</flag>
+                          <border>10</border>
+                          <cellpos>2,3</cellpos>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxRadioButton" name="xmlUserRadioButton">
+                            <label>use xml file control user</label>
+                            <XRCED>
+                              <events>EVT_RADIOBUTTON</events>
+                            </XRCED>
+                          </object>
+                          <option>1</option>
+                          <flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTRE_VERTICAL</flag>
+                          <border>5</border>
+                          <cellpos>3,2</cellpos>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="xmlUserButton">
+                            <label>Open xml</label>
+                            <XRCED>
+                              <events>EVT_BUTTON</events>
+                            </XRCED>
+                          </object>
+                          <option>1</option>
+                          <flag>wxALL|wxALIGN_CENTRE</flag>
+                          <border>10</border>
+                          <cellpos>3,3</cellpos>
+                        </object>
+                        <vgap>4</vgap>
+                        <hgap>4</hgap>
+                        <growablecols>1,2,3</growablecols>
+                        <growablerows>1,2,3</growablerows>
+                      </object>
+                    </object>
+                    <option>1</option>
+                    <flag>wxEXPAND</flag>
+                  </object>
+                </object>
+              </object>
+              <label>User Control</label>
+            </object>
+            <object class="notebookpage">
+              <object class="wxPanel" name="systemCheckPanel">
+                <object class="wxGridBagSizer">
+                  <object class="sizeritem">
+                    <object class="wxPanel" name="userGrid1Panel">
+                      <object class="wxBoxSizer">
+                        <orient>wxVERTICAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxGrid" name="userGrid"/>
+                          <option>1</option>
+                          <flag>wxEXPAND</flag>
+                          <border>2</border>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxTextCtrl" name="userTextCtrl">
+                            <style>wxTE_MULTILINE</style>
+                          </object>
+                          <option>1</option>
+                          <flag>wxEXPAND</flag>
+                          <border>2</border>
+                        </object>
+                      </object>
+                    </object>
+                    <option>1</option>
+                    <flag>wxEXPAND</flag>
+                    <cellpos>0,0</cellpos>
+                  </object>
+                  <growablecols>0</growablecols>
+                  <growablerows>0</growablerows>
+                  <object class="sizeritem">
+                    <object class="wxPanel" name="userGrid2Panel">
+                      <object class="wxBoxSizer">
+                        <orient>wxVERTICAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="killUserButton">
+                            <label>Kill User</label>
+                            <XRCED>
+                              <events>EVT_BUTTON</events>
+                            </XRCED>
+                          </object>
+                          <flag>wxEXPAND</flag>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="messageUserButton">
+                            <label>Message User</label>
+                            <XRCED>
+                              <events>EVT_BUTTON</events>
+                            </XRCED>
+                          </object>
+                          <flag>wxEXPAND</flag>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="addUserButton">
+                            <label>Add user</label>
+                            <XRCED>
+                              <events>EVT_BUTTON</events>
+                            </XRCED>
+                          </object>
+                          <flag>wxEXPAND</flag>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxButton" name="showAllUsersButton">
+                            <label>Show all users</label>
+                            <XRCED>
+                              <events>EVT_BUTTON</events>
+                            </XRCED>
+                          </object>
+                          <flag>wxEXPAND</flag>
+                        </object>
+                      </object>
+                    </object>
+                    <flag>wxEXPAND</flag>
+                    <cellpos>0,1</cellpos>
+                  </object>
+                </object>
+              </object>
+              <label>System Check</label>
+            </object>
+            <XRCED>
+              <events>EVT_NOTEBOOK_PAGE_CHANGED</events>
+            </XRCED>
+          </object>
+          <option>1</option>
+          <flag>wxEXPAND</flag>
+        </object>
+        <orient>wxHORIZONTAL</orient>
+      </object>
+    </object>
+    <object class="wxStatusBar" name="mainStatusBar"/>
+    <object class="wxMenuBar" name="mainMenuBar">
+      <object class="wxMenu" name="fileMenu">
+        <object class="wxMenuItem" name="exitMenuItem">
+          <label>Exit</label>
+          <XRCED>
+            <events>EVT_MENU</events>
+          </XRCED>
+        </object>
+        <label>File</label>
+      </object>
+      <object class="wxMenu" name="helpMenu">
+        <object class="wxMenuItem" name="aboutMenuItem">
+          <label>About</label>
+          <XRCED>
+            <events>EVT_MENU</events>
+          </XRCED>
+        </object>
+        <label>Help</label>
+      </object>
+    </object>
+    <title>xdIm server Manager</title>
+    <centered>1</centered>
+  </object>
+</resource>

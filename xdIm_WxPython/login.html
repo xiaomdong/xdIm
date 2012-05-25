@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>just for test</title>
+</head>
+
+    <style>
+input{
+font-size:1em;
+}
+a{color:#345375}
+form{
+margin:0;
+padding:0;
+}
+form div{
+margin:auto;
+margin-bottom:.6em;
+width:88%;
+}
+.input{
+margin-bottom:1em;
+text-align:left;
+}
+.talk{
+font-family:"Verdana";
+color:#444;
+padding:0;
+text-align:center;
+width:250px;
+background:#FFf;
+}
+.input input{
+width:100%;
+}
+.titlebar{
+background:url(title_left.bmp) no-repeat 0% 0%;
+font-size:80%;
+text-align:left;
+line-height:1.7em;
+padding-left:2px;
+}
+.title_right{
+background:url(title_right.bmp) no-repeat 100% 0%;
+}
+.title_content{
+margin-left:5px;
+margin-right:5px;
+background:url(toolbar.bmp) repeat-x;
+}
+.title_content img{
+float:right;
+margin:.2em;
+margin-right:0;
+}
+.toolbar{
+text-align:left;
+margin:.3em;
+font-size:86%;
+margin-bottom:15%;
+border-bottom:1px solid #A2A2A2;
+}
+.login_state{
+font-size:95%;
+line-height:1.6em;
+}
+.desp,.user{
+font-size:"新宋体";
+padding-left:13px;
+}
+.user{
+margin-left:.2em;
+clear:both;
+background:url(state_unlink.png) no-repeat 0% 50%;
+}
+.desp{
+color:#999;
+}
+.more_link{
+margin-top:1em;
+font-size:90%;
+}
+.more_link a{
+display:block;
+margin-bottom:.7em;
+}
+.login_submit{
+margin-top:.6em;
+padding:.2em 1.7em 0;
+font-size:90%;
+}
+.search_wrapper{
+padding-left:17px;
+margin:auto;
+margin-bottom:.3em;
+border:1px solid #bebebe;
+background:url("search.png") no-repeat;
+height:19px;
+_width:88%;
+}
+.search{
+height:16px;
+font-size:1.1em;
+padding-top:.1em;
+border-width:0;
+color:#999;
+width:97%;
+}
+.resize_drag{
+float:right;margin:0;padding:0;cursor:nw-resize;
+padding-right:2px;
+padding-top:8px;
+padding-bottom:2px;
+}
+.bottombar{
+border:1px solid #969696;
+border-top-width:0;
+}
+.talk_body{
+height:480px;
+border:1px solid #969696;
+border-top-color:#ccc;
+border-bottom-width:0;
+}
+.bottombar,.titlebar,.talk_body{
+float:right;
+width:100%;
+}
+.button{
+float:left;margin-left:.4em;
+cursor:pointer;
+}
+</style>
+
+<body >
+
+<div class="talk">
+    <div class="titlebar">
+        <div class="title_right">
+            <div class="title_content">
+            <img src="close.png" onclick="alert(1)"/>
+            <img src="min.png" onclick="alert(1)" />
+            Stuhome Talk
+            </div>
+        </div>
+
+    </div>
+    <div class="talk_body">
+        <div class="toolbar">
+            <img style="float: left;margin-bottom:.3em;" src="logo.bmp">
+            <span style="float: right;">
+                <a href="javascript:alert(1)" rel="xxx">设置</a>|<a href="#ggg" rel="xxx">帮助</a>
+            </span>
+            <div class="login_state">
+                <div class="user">zsp007@gmail.com</div>
+                <div class="desp">重新连接 - 32秒 <img style="cursor:pointer;" src="drop.bmp"/></div>
+                <div class="search_wrapper"><input class="search" text="text" value="搜索所有联系人"/></div>
+            </div>
+        </div>
+    </div>
+    <div class="bottombar">
+        <img class="button" src="add_button.bmp" onmouseout="this.src='add_button.bmp'" onmouseover="this.src='add_button_active.bmp'" onmousedown
+="this.src='add_button_click.bmp'"/>
+        <img class="button" src="view_button.bmp"
+        onmouseout="this.src='view_button.bmp'"
+        onmouseover="this.src='view_button_active.bmp'"
+        onmousedown="this.src='view_button_click.bmp'"
+        />
+        <img src="resize.png" class="resize_drag"/>
+    </div>
+    
+</div>
+
+	<h1>hello</h1>
+	<span>-----------------------------------</span>
+	<h1>hello</h1>
+	<input> 
+
+	<button>ok</button>
+	<button>cancle</button>
+
+<center>
+<wxp module="wx" class="Button" width="50%">
+    <param name="label" value="It works!">
+    <param name="id"    value="ID_OK">
+</wxp>
+</center>
+
+</body>
+</html>

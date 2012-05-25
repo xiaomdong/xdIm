@@ -1,0 +1,96 @@
+<?xml version="1.0" ?>
+<resource>
+  <object class="wxPanel" name="mainPanel">
+    <object class="wxGridBagSizer">
+      <object class="sizeritem">
+        <object class="wxStaticText" name="serverStaticText">
+          <label>server</label>
+        </object>
+        <option>2</option>
+        <flag>wxALL|wxALIGN_LEFT|wxADJUST_MINSIZE</flag>
+        <border>5</border>
+        <cellpos>1,1</cellpos>
+      </object>
+      <object class="sizeritem">
+        <object class="wxComboBox" name="serverComboBox"/>
+        <option>1</option>
+        <flag>wxALL|wxGROW|wxALIGN_LEFT|wxADJUST_MINSIZE</flag>
+        <border>5</border>
+        <cellpos>1,2</cellpos>
+        <cellspan>1,2</cellspan>
+      </object>
+      <object class="sizeritem">
+        <object class="wxStaticText" name="userStaticText">
+          <label>user</label>
+        </object>
+        <option>2</option>
+        <flag>wxALL|wxALIGN_LEFT|wxADJUST_MINSIZE</flag>
+        <border>5</border>
+        <cellpos>2,1</cellpos>
+      </object>
+      <object class="sizeritem">
+        <object class="wxComboBox" name="userComboBox"/>
+        <option>1</option>
+        <flag>wxALL|wxGROW|wxALIGN_LEFT|wxADJUST_MINSIZE</flag>
+        <border>5</border>
+        <cellpos>2,2</cellpos>
+        <cellspan>1,2</cellspan>
+      </object>
+      <object class="sizeritem">
+        <object class="wxStaticText" name="passwordStaticText">
+          <label>password</label>
+        </object>
+        <option>2</option>
+        <flag>wxALL|wxALIGN_LEFT|wxADJUST_MINSIZE</flag>
+        <border>5</border>
+        <cellpos>3,1</cellpos>
+      </object>
+      <object class="sizeritem">
+        <object class="wxBoxSizer">
+          <object class="sizeritem">
+            <object class="wxTextCtrl" name="passwordTextCtrl">
+              <style>wxTE_PASSWORD</style>
+            </object>
+            <option>0</option>
+            <flag>wxEXPAND</flag>
+          </object>
+          <orient>wxVERTICAL</orient>
+        </object>
+        <option>1</option>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+        <cellpos>3,2</cellpos>
+        <cellspan>1,2</cellspan>
+      </object>
+      <object class="sizeritem">
+        <object class="wxButton" name="okButton">
+          <label>ok</label>
+          <XRCED>
+            <events>EVT_BUTTON</events>
+          </XRCED>
+        </object>
+        <option>1</option>
+        <flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTRE_VERTICAL|wxADJUST_MINSIZE</flag>
+        <border>5</border>
+        <cellpos>4,1</cellpos>
+      </object>
+      <object class="sizeritem">
+        <object class="wxButton" name="cancelButton">
+          <label>cancel</label>
+          <XRCED>
+            <events>EVT_BUTTON</events>
+          </XRCED>
+        </object>
+        <option>1</option>
+        <flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTRE_VERTICAL|wxADJUST_MINSIZE</flag>
+        <border>5</border>
+        <cellpos>4,2</cellpos>
+      </object>
+      <vgap>4</vgap>
+      <hgap>4</hgap>
+      <growablecols>1,2,3</growablecols>
+      <growablerows>1,2,3</growablerows>
+    </object>
+    <style>wxSTATIC_BORDER|wxTAB_TRAVERSAL</style>
+  </object>
+</resource>

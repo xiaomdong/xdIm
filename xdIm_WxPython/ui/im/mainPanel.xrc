@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<resource>
+  <object class="wxPanel" name="mainPanel">
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxNotebook" name="mainNotebook">
+          <object class="notebookpage">
+            <object class="wxPanel" name="linkmanPanel">
+              <object class="wxBoxSizer">
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxTreeCtrl" name="linkmanTreeCtrl">
+                    <XRCED>
+                      <events>EVT_TREE_ITEM_ACTIVATED|EVT_TREE_ITEM_MENU</events>
+                    </XRCED>
+                  </object>
+                  <option>1</option>
+                  <flag>wxEXPAND</flag>
+                </object>
+              </object>
+            </object>
+            <label>linkman</label>
+          </object>
+          <object class="notebookpage">
+            <object class="wxPanel" name="groupPanel">
+              <object class="wxBoxSizer">
+                <orient>wxVERTICAL</orient>
+                <object class="sizeritem">
+                  <object class="wxTreeCtrl" name="groupTreeCtrl"/>
+                  <option>1</option>
+                  <flag>wxEXPAND</flag>
+                </object>
+              </object>
+            </object>
+            <label>group</label>
+          </object>
+        </object>
+        <option>1</option>
+        <flag>wxEXPAND</flag>
+        <border>0</border>
+        <minsize>200,400</minsize>
+      </object>
+    </object>
+  </object>
+</resource>

@@ -1,0 +1,4 @@
+[user=cc;password=apples;friends={admin};]
+[user=xd;password=apples;friends={cvs};]
+[user=cvs;password=apples;friends={xd};]
+[user=ll;password=apples;friends={xd,cvs};]

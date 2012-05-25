@@ -1,0 +1,52 @@
+package messageProtocol;
+
+message communion{
+  required string srcName = 1;
+  required string dstName = 2;
+  
+  enum messageType {
+    userPassword = 0;
+	friendList = 1;
+    content = 2;
+  }
+  required messageType messageFlag = 3;
+  required string message = 4;
+
+}
+
+message userPassword {
+  required string user = 1;
+  required string password = 2;
+  enum messageType {
+	request = 0 ;
+	responsion = 1 ;
+  }	
+  required messageType messageFlag = 3;
+  
+  enum messageValue{
+  	login = 0 ;
+  	sucess = 1 ;
+  	failed = 2 ;	
+  }
+  optional messageValue message = 4;
+   
+}
+
+message Friend{
+	enum Status{
+		online=0;
+		outline=1;
+	}
+	required string user=1;
+	required Status status=2;
+}
+
+message friendlist {
+  enum messageType {
+	request = 0 ;
+	responsion = 1 ;
+	active=2;
+  }	
+  required messageType messageFlag = 1;
+  repeated string friend = 2;
+}

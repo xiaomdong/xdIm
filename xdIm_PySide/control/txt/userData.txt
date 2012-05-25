@@ -1,0 +1,6 @@
+[user=pp;password=admin;friends={admin,cvs};]
+[user=ll;password=admin;friends={admin,xd,cvs};]
+[user=cvs;password=apples;friends={xd};]
+[user=xd;password=admin;friends={admin,cvs};]
+[user=xx;password=admin;friends={admin,cvs};]
+[user=fbg;password=admin;friends={admin,cvs};]

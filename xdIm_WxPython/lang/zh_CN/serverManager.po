@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-09-21 08:45+中国标准时间\n"
+"PO-Revision-Date: 2011-01-24 16:05+0800\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+
+msgid "Chinese"
+msgstr "中文"
+
+msgid "English"
+msgstr "英文"
+
+msgid "this program was maded by xd"
+msgstr "此程序由xd编制"
+
+msgid "Start Server"
+msgstr "开始服务"
+
+msgid "Stop Server"
+msgstr "结束服务"
+
+msgid "Server Control"
+msgstr "服务控制"
+
+msgid "use txt file control user"
+msgstr "使用txt文件管理用户"
+
+msgid "Open txt"
+msgstr "打开 txt"
+
+msgid "use mysql database control user"
+msgstr "使用mysql文件管理用户"
+
+msgid "Control"
+msgstr "控制"
+
+msgid "use xml file control user"
+msgstr "使用xml文件管理用户"
+
+msgid "Open xml"
+msgstr "打开 xml"
+
+msgid "User Control"
+msgstr "用户控制"
+
+msgid "Kill User"
+msgstr "踢出用户"
+
+msgid "Message User"
+msgstr "发送消息给用户"
+
+msgid "Add user"
+msgstr "添加用户"
+
+msgid "Show all users"
+msgstr "显示所有用户"
+
+msgid "System Check"
+msgstr "系统检测"
+
+msgid "Exit"
+msgstr "退出"
+
+msgid "File"
+msgstr "文件"
+
+msgid "About"
+msgstr "关于"
+
+msgid "Help"
+msgstr "帮助"
+
+msgid "xdIm server Manager"
+msgstr "xdIm 服务管理器"
+

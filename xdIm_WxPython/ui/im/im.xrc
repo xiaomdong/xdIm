@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<resource>
+  <object class="wxFrame" name="mainFrame">
+    <object class="wxMenuBar" name="mainMenuBar">
+      <object class="wxMenu" name="FileMenu">
+        <object class="wxMenuItem" name="loginMenuItem">
+          <label>login</label>
+          <XRCED>
+            <events>EVT_MENU</events>
+          </XRCED>
+        </object>
+        <object class="wxMenuItem" name="logoutMenuItem">
+          <label>logout</label>
+          <XRCED>
+            <events>EVT_MENU</events>
+          </XRCED>
+        </object>
+        <label>File</label>
+      </object>
+      <object class="wxMenu" name="operateMenu">
+        <label>operate</label>
+        <object class="wxMenuItem" name="addFriendMenuItem">
+          <label>add Friend</label>
+          <XRCED>
+            <events>EVT_MENU</events>
+          </XRCED>
+        </object>
+        <object class="wxMenuItem" name="deleteFriendMenuItem">
+          <label>delete Friend</label>
+          <XRCED>
+            <events>EVT_MENU</events>
+          </XRCED>
+        </object>
+      </object>
+      <object class="wxMenu" name="helpMenu">
+        <label>help</label>
+        <object class="wxMenuItem" name="aboutMenuItem">
+          <label>about</label>
+          <XRCED>
+            <events>EVT_MENU</events>
+          </XRCED>
+        </object>
+      </object>
+    </object>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+    </object>
+    <title>Im</title>
+    <centered>1</centered>
+    <XRCED>
+      <events>EVT_CLOSE</events>
+    </XRCED>
+  </object>
+</resource>
