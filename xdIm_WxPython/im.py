@@ -163,7 +163,7 @@ class ImFrame(ImUi):
         else:
             self.locale=False
         
-        if self.locale:
+        if self.locale==True:
             self.doClose()
         else:
             self.Hide()

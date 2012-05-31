@@ -4,7 +4,7 @@ pyside-uic serverManager.ui -o serverManager_ui.py
 
 pyside-lupdate serverManager_ui.py -ts serverManager.ts
 
-lrelease serverManager.ts -qm serverManager.qm
+lrelease serverManager.ts serverManagerAdd.ts -qm serverManager.qm
 
 Created on 2011-1-8
 
@@ -18,8 +18,9 @@ from debug import uiDebug
 
 
 from PySide.QtGui import QMainWindow, QStandardItemModel , QStandardItem , QFileDialog, QApplication, QMessageBox, QAction, QDesktopWidget
-from PySide.QtCore import QObject , Qt  , QDir , QTranslator, SIGNAL, SLOT
-#from PySide import QtCore ,QtGui
+from PySide.QtCore import QObject , Qt  , QDir , QTranslator, SIGNAL, SLOT 
+from PySide.QtGui import QSystemTrayIcon, QIcon, QMenu
+#from PySide.QtCore import QEvent, QTimer
 
 import qt4reactor
 app = QApplication(sys.argv)
@@ -33,7 +34,8 @@ from config import serverConfig, mediaValue
 #from debug import *
 from control.txt.txtUserControl import txtUserControl
 from control.xml.xmlUserControl import xmlUserControl
-#from control.mysql.sqlUserControl import *
+from control.sqlite.sqliteUserControl import sqliteUserControl
+#from control.mysql.mysqlUserControl import mysqlUserControl
 
 
 
@@ -43,7 +45,9 @@ Chinese = "Chinese"
 English = "English"
 txt = "txt"
 xml = "xml"
-mysql = "mysql"
+mysql = "MySQL"
+sqlite = "Sqlite"
+
 
 #class userTableView(QAbstractTableModel):
 #    
@@ -79,8 +83,18 @@ class serverManagerWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        self.iTrayIcon = QSystemTrayIcon()
+        self.iTrayIcon.setIcon(QIcon("drapes.ico"))
+        self.iTrayIcon.show()
+        self.iTrayIcon.setToolTip("One world, One dream!")
+        self.iTrayIcon.activated.connect(self.iconActivated)
+        self.quitAction = QAction("&Quit", self, triggered=QApplication.quit)
+        self.trayIconMenu = QMenu(self)
+        self.trayIconMenu.addAction(self.quitAction)
+        self.iTrayIcon.setContextMenu(self.trayIconMenu)
+
         #选择MYSQL保留用户信息
-        QObject.connect(self.ui.mysql_groupBox, SIGNAL("clicked()"), self, SLOT("choiceMysql()"))
+        QObject.connect(self.ui.mysql_groupBox, SIGNAL("clicked()"), self, SLOT("choiceSql()"))
         #选择XT文件留用户信息
         QObject.connect(self.ui.text_groupBox, SIGNAL("clicked()"), self, SLOT("choiceTxt()"))
         #选择XML文件留用户信息
@@ -105,6 +119,10 @@ class serverManagerWindow(QMainWindow):
         QObject.connect(self.ui.startServer_pushButton, SIGNAL("clicked()"), self, SLOT("startServer()"))
         #停止服务
         QObject.connect(self.ui.stopServer_pushButton, SIGNAL("clicked()"), self, SLOT("stopServer()"))
+
+        self.ui.sqlTypeComboBox.activated[str].connect(self.sqlServer)
+                
+        QObject.connect(self.ui.openSqlpushButton, SIGNAL("clicked()"), self, SLOT("database_open()"))
         
 
         #界面语言
@@ -113,6 +131,9 @@ class serverManagerWindow(QMainWindow):
         self.translator = QTranslator() 
         self.connect = None
         self.users = None
+        self.ControlMediaPath = None
+        self.ControlMedia = None
+        self.delUsrInfo = None
 
         self.userModel = QStandardItemModel()
         self.userModel.setHorizontalHeaderItem(0, QStandardItem("user"))
@@ -130,7 +151,7 @@ class serverManagerWindow(QMainWindow):
         self.messageModel = QStandardItemModel()
         self.messageModel.setHorizontalHeaderItem(0, QStandardItem("message"))
 
-
+        #读取系统配置文件
         self.readConfig(configFile)
         self.statusBar().showMessage("server is stopped!")
         
@@ -144,7 +165,34 @@ class serverManagerWindow(QMainWindow):
         self.updateLanguage(self.language)
         
         self.center()
+        
+    def iconActivated(self, reason):
+        if reason == QSystemTrayIcon.DoubleClick:
+            self.show()
+        print "iconActivated"
+    
+    def closeEvent(self, event):
+        event.ignore()
+        self.hide()
+        print "closeEvent"
 
+#    def changeEvent(self,event):
+#        if (event.type() == QEvent.WindowStateChange) and (self.isMinimized()):
+#            QTimer.singleShot(100, self, SLOT("close"))
+#            
+#        print "changeEvent"    
+                
+    def sqlServer(self, index):
+        if index == "MySQL":
+            self.ui.openSqlpushButton.setDisabled(True)
+            self.ui.userLineEdit.setEnabled(True)
+            self.ui.passwordlineEdit.setEnabled(True)        
+            
+        if  index == "Sqlite":
+            self.ui.openSqlpushButton.setEnabled(True)
+            self.ui.userLineEdit.setDisabled(True)
+            self.ui.passwordlineEdit.setDisabled(True)        
+        
     def center(self):  
         screen = QDesktopWidget().screenGeometry()  
         size = self.geometry()  
@@ -207,7 +255,6 @@ class serverManagerWindow(QMainWindow):
             model.removeRow(index.row(), index.parent())
             self.users.deleteUser(user)
             self.users.userDataSave()
-#            model.removeRow(index.row())
             #pylint: disable=W0702 
         except:    
             pass        
@@ -245,46 +292,48 @@ class serverManagerWindow(QMainWindow):
                     self.users.addUser(user, "admin")
                 if friendlist != "[No data]":
                     for friend in friendlist.split(","):
-                        self.users.addUserFriend(user, friend)   
+                        if friend != '':
+                            self.users.addUserFriend(user, friend)   
         
             self.users.userDataSave()
-            for row in range(model.rowCount(index.parent())):
-                model.removeRow(row, index.parent())
+            self.clearUserInfo()    
             self.showUserinfo()
         uiDebug("userInfoSaveData")        
     
 
     def showConfig(self):
         '''显示配置'''
+#        print self.Config.getControlMedia()    
+#        print self.Config.getControlMediaPath()   
+#        print self.ControlMedia
+#        print self.ControlMediaPath     
         self.ui.information_textBrowser.setText("Control Media: " + self.ControlMedia)
         self.ui.information_textBrowser.append("Control Media path: " + self.ControlMediaPath)
 
     def showUserinfo(self):
-        '''showUserinfo'''
+        '''显示用户信息'''
         userlist = self.users.getUsers()
-#        print userlist
+        print "showUserinfo "
+        print userlist
         row = 0
         for user in userlist:
             friends = userlist[user]
             self.userModel.setItem(row, 0, QStandardItem(user))
             self.userModel.setItem(row, 1, QStandardItem(friends))
-            row += 1
+            row = row + 1  
         #pylint: disable=W0201    
         self.delUsrInfo = None
-        
-        
-    def readConfig(self, _file):
-        '''读取服务器端配置文件'''
-        #pylint: disable=W0201
-        self.Config = serverConfig(_file)
-        self.ControlMedia = self.Config.getControlMedia() 
-        self.ControlMediaPath = self.Config.getControlMediaPath()        
-        self.language = self.Config.getLanguage()
-        self.showConfig()
-#        #界面多语处理
-#        self.updateLanguage(self.language)
+    
+    def clearUserInfo(self):
+        '''清除用户信息'''
+        self.userModel.clear()
+        self.delUsrInfo = None
 
         
+    def userConfig(self):
+        self.showConfig()
+        if self.users != None:
+            del self.users        
         #服务器配置
         if self.ControlMedia == mediaValue[txt]:
             #txt文件保留用户信息
@@ -296,31 +345,61 @@ class serverManagerWindow(QMainWindow):
             self.users = xmlUserControl(self.ControlMediaPath)
             self.ui.xml_groupBox.setChecked(True)
             self.ui.xml_lineEdit.setText(self.ControlMediaPath)
+            
         elif self.ControlMedia == mediaValue[mysql]:
             #mysql数据库保留用户信息   
             self.ui.mysql_groupBox.setChecked(True)
-        
+            self.ui.ServerLineEdit.setText(self.ControlMediaPath)
+            self.ui.sqlTypeComboBox.setCurrentIndex(0)
+#            print "mysql" 
+            self.sqlServer(mysql)    
+        elif self.ControlMedia == mediaValue[sqlite]:
+            self.ui.mysql_groupBox.setChecked(True)
+            self.ui.ServerLineEdit.setText(self.ControlMediaPath)
+            self.ui.sqlTypeComboBox.setCurrentIndex(1)
+            self.users = sqliteUserControl(self.ControlMediaPath)
+            self.sqlServer(sqlite)
+#            print "sqlite"
+            
         #用户数据初始化
+            
         try:     
             self.users.userDataInit()
-            self.showUserinfo()
+#            self.showUserinfo()
             #pylint: disable=W0702
         except:
             self.users = None
+
+        if self.users != None:
+            self.clearUserInfo()
+            self.showUserinfo()
+                    
+    def readConfig(self, _file):
+        '''读取服务器端配置文件'''
+        #pylint: disable=W0201
+        self.Config = serverConfig(_file)
+        self.ControlMedia = self.Config.getControlMedia() 
+        self.ControlMediaPath = self.Config.getControlMediaPath()        
+        self.language = self.Config.getLanguage()
+        self.userConfig()
         uiDebug("readConfig")
                     
     def startServer(self):
         '''#启动服务'''
         self.ui.startServer_pushButton.setEnabled(False)
         self.ui.stopServer_pushButton.setEnabled(True)
-#        print self.users
         self.connect = server_twisted.serverMain(8002, self.users)
-        self.setUserConfig()
+        self.saveConfig()
+#        self.readConfig(configFile)
+        self.userConfig()
         self.ui.mysql_groupBox.setDisabled(True)
         self.ui.text_groupBox.setDisabled(True)
         self.ui.xml_groupBox.setDisabled(True)
         self.statusBar().showMessage("server is starting!")
         
+        if self.users != None:
+            self.clearUserInfo()
+            self.showUserinfo()
         uiDebug("startServer")
 
     def stopServer(self):
@@ -333,12 +412,13 @@ class serverManagerWindow(QMainWindow):
             self.ui.xml_groupBox.setDisabled(False)  
             #pylint: disable=E1101          
             reactor.disconnectAll()
+#            self.clearUserInfo()
             self.statusBar().showMessage("server is stopped!")
         uiDebug("stopServer")
         
 
     def loadChinese(self):
-        """加载中文"""
+        '''加载中文'''
         self.updateLanguage(Chinese)
 
     def loadEnglish(self):
@@ -373,6 +453,9 @@ class serverManagerWindow(QMainWindow):
     def xml_open(self):
         self.fileOpen(self.ui.xml_lineEdit, xml)
 
+    def database_open(self):
+        self.fileOpen(self.ui.ServerLineEdit, mysql)
+
     def fileOpen(self, lineEdit, filters):
         openFile = QFileDialog.getOpenFileName(self, "Find Files", QDir.currentPath(), filters="*." + filters)
         uiDebug(openFile)
@@ -380,12 +463,21 @@ class serverManagerWindow(QMainWindow):
             lineEdit.setText(openFile[0])
             self.setUserConfig()
             self.showConfig()
-
-    def choiceMysql(self):
+                    
+    def choiceSql(self):
         uiDebug("choiceMysql")
         self.ui.text_groupBox.setChecked(False)
         self.ui.xml_groupBox.setChecked(False)
-
+        if  self.ui.sqlTypeComboBox.currentText() == mysql:
+            self.ui.openSqlpushButton.setDisabled(True)
+            self.ui.userLineEdit.setEnabled(True)
+            self.ui.passwordlineEdit.setEnabled(True)   
+            
+        if  self.ui.sqlTypeComboBox.currentText() == sqlite:
+            self.ui.openSqlpushButton.setEnabled(True)
+            self.ui.userLineEdit.setDisabled(True)
+            self.ui.passwordlineEdit.setDisabled(True)
+            
     def choiceTxt(self):
         uiDebug("choiceTxt")
         self.ui.mysql_groupBox.setChecked(False)
@@ -398,26 +490,30 @@ class serverManagerWindow(QMainWindow):
 
     def setUserConfig(self):
         '''保留用户配置'''
-        if self.ui.xml_groupBox.isChecked():
+        if self.ui.xml_groupBox.isChecked() == True:
             if self.ui.xml_lineEdit.text() != "":
-                self.Config.setContrlMedia(xml)
-                self.Config.setControlMediaPath(self.ui.xml_lineEdit.text())
-                self.Config.saveServerConfig()
+                self.ControlMedia = xml
+                self.ControlMediaPath = self.ui.xml_lineEdit.text()
                 uiDebug("setUserConfig xml: " + xml)
-            return
          
-        if self.ui.text_groupBox.isChecked():
+        if self.ui.text_groupBox.isChecked() == True:
             if self.ui.text_lineEdit.text() != "":
-                self.Config.setContrlMedia(txt)
-                self.Config.setControlMediaPath(self.ui.text_lineEdit.text())
-                self.Config.saveServerConfig()
+                self.ControlMedia = txt
+                self.ControlMediaPath = self.ui.text_lineEdit.text()
                 uiDebug("setUserConfig txt: " + txt)
-            return
          
-        if self.ui.mysql_groupBox.isChecked():
-#             self.Config.setContrlMedia(mysql)
-            return
+        if self.ui.mysql_groupBox.isChecked() == True:
+            if self.ui.sqlTypeComboBox.currentText() == mysql:
+                self.ControlMedia = mysql
+                uiDebug("setUserConfig mysql: " + mysql)
+            if self.ui.sqlTypeComboBox.currentText() == sqlite:
+                self.ControlMedia = sqlite
+                uiDebug("setUserConfig sqlite: " + sqlite)
+            self.ControlMediaPath = self.ui.ServerLineEdit.text()
 
+        self.Config.setContrlMedia(self.ControlMedia)
+        self.Config.setControlMediaPath(self.ControlMediaPath)
+        self.userConfig()    
         
     def createloginUsersContextMenu(self):
         '''添加登陆用户快捷菜单'''
@@ -500,6 +596,9 @@ class serverManagerWindow(QMainWindow):
         self.saveDataRowAct.setText(QApplication.translate("MainWindow", "save Data", None, QApplication.UnicodeUTF8))
         self.killUserAct.setText(QApplication.translate("MainWindow", "kill User", None, QApplication.UnicodeUTF8))
         self.messageUserAct.setText(QApplication.translate("MainWindow", "message User", None, QApplication.UnicodeUTF8))
+        self.quitAction.setText(QApplication.translate("MainWindow", "Quit", None, QApplication.UnicodeUTF8))
+        self.iTrayIcon.setToolTip(QApplication.translate("MainWindow", "One world, One dream!", None, QApplication.UnicodeUTF8))
+        
         self.ui.retranslateUi(self)
 
     def loadConfig(self):
@@ -515,6 +614,7 @@ class serverManagerWindow(QMainWindow):
 
     def saveConfig(self):
         '''保留配置文件'''
+        self.setUserConfig()
         self.Config.saveServerConfig()
         uiDebug("saveConfig") 
 
@@ -543,4 +643,5 @@ def main():
 
 if __name__ == '__main__':
     main()            
+    
     

@@ -51,7 +51,7 @@ def printdebug(*args):
     '''
         Debug打印
     '''
-    if not userControlebug:
+    if userControlebug==0:
         pass
     else:
         try:

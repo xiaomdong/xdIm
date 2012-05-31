@@ -15,9 +15,10 @@ import ConfigParser
     
 mediaValue = {
              "txt"    : "txt"   , #txt
-             "mysql"  : "mysql" , #mysql
+             "MySQL"  : "MySQL" , #mysql
+             "Sqlite" : "Sqlite", #sqlite 
              "xml"    : "xml"   , #xml
-           }
+             }
 
 
     

@@ -62,14 +62,14 @@ class friendModel(QtCore.QAbstractItemModel):
         
         friend = friend
         status = status
-        print "1 clientData addFriendRow start"
+#        print "1 clientData addFriendRow start"
         
 #        self.rowCount(parent)
         indexA = self.index(0, 0, QtCore.QModelIndex())
-        print "2 "+str(indexA)
+#        print "2 "+str(indexA)
         indexB = self.index(0, 0, indexA)
-        print "3 "+str(indexB)
-        print "4 "+str(self.data(indexB,QtCore.Qt.DisplayRole))                
+#        print "3 "+str(indexB)
+#        print "4 "+str(self.data(indexB,QtCore.Qt.DisplayRole))                
         
 #        print "3 "+ str(self.data(indexA,QtCore.Qt.DisplayRole))
 #        indexA = self.index(0, 1, QtCore.QModelIndex())
@@ -85,7 +85,7 @@ class friendModel(QtCore.QAbstractItemModel):
 #        print indexB
 #
 #        print self.insertRow(1,QtCore.QModelIndex())
-        print "5 "+str(self.insertRow(1,indexA))
+#        print "5 "+str(self.insertRow(1,indexA))
 #        
 #        indexB = self.index(1, 0, indexA);
 #        print indexB        
@@ -97,7 +97,7 @@ class friendModel(QtCore.QAbstractItemModel):
         self.setData(index1,"test",QtCore.Qt.EditRole)
         self.setData(index2,"online",QtCore.Qt.EditRole)
                 
-        print "6 clientData addFriendRow end"
+#        print "6 clientData addFriendRow end"
                      
     def columnCount(self, parent):
         if parent.isValid():

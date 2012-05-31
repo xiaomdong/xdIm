@@ -25,7 +25,7 @@ class txtUserControl(userControl):
         '''
                             打开用户配置文件，初始化用户配置数据
         '''
-        if self.userDataModifiedFlag:
+        if self.userDataModifiedFlag==True:
             controlDebug(u"txtUserControl TIP: txtUserControl.userDataInit 用户数据已经被修改，不能初始化用户数据")
             return userControlErrValue["ControlDataModified"]
         
@@ -72,7 +72,7 @@ class txtUserControl(userControl):
         '''
                             保存用户配置数据到用户配置文件
         '''
-        if not self.userDataModifiedFlag:
+        if self.userDataModifiedFlag==False:
             controlDebug(u"txtUserControl TIP: txtUserControl.userDataSave 用户数据没有修改，不需要保存")
             return userControlErrValue["ControlDataNoModified"]
         
@@ -128,7 +128,7 @@ class txtUserControl(userControl):
     
     def addUser(self,user,password):
         '''添加用户'''
-        if self.userPassword.has_key(user):
+        if self.userPassword.has_key(user)==True:
             controlDebug(u"txtUserControl TIP: txtUserControl.addUser 用户已使用")
             return userControlErrValue["HaveUser"]
         
@@ -140,7 +140,7 @@ class txtUserControl(userControl):
     
     def deleteUser(self,user):
         '''删除用户'''
-        if not self.userPassword.has_key(user):
+        if self.userPassword.has_key(user)==False:
             controlDebug(u"txtUserControl TIP: txtUserControl.deleteUser 用户不存在")
             return userControlErrValue["NoUser"]
         
@@ -154,7 +154,7 @@ class txtUserControl(userControl):
     def checkUser(self,user,password):
         '''核对用户名和密码是否正确'''
         controlDebug(user+" "+password)
-        if not self.userPassword.has_key(user):
+        if self.userPassword.has_key(user)==False:
             controlDebug(u"txtUserControl TIP: txtUserControl.checkUser 用户不存在")
             return userControlErrValue["NoUser"]
         
@@ -167,7 +167,7 @@ class txtUserControl(userControl):
     
     def modifyUserPassword(self,user,password):
         '''修改用户密码'''
-        if not self.userPassword.has_key(user):
+        if self.userPassword.has_key(user)==False:
             controlDebug(u"txtUserControl TIP: txtUserControl.modifyUserPassword 用户不存在")
             return userControlErrValue["NoUser"]
         
@@ -178,7 +178,7 @@ class txtUserControl(userControl):
 
     def getUserFriends(self,user):
         '''获取用户好友列表'''
-        if not self.userFriends.has_key(user):
+        if self.userFriends.has_key(user)==False:
             controlDebug(u"txtUserControl ERR: txtUserControl.getUserFriends 用户不存在")
             return userControlErrValue["NoUser"]
         
@@ -191,7 +191,7 @@ class txtUserControl(userControl):
         '''查询用户是否存在'''
         controlDebug(u"txtUserControl txtUserControl.finedUser :"+ user)
         controlDebug(self.userPassword)
-        if not self.userPassword.has_key(user):
+        if self.userPassword.has_key(user)==False:
             controlDebug(u"txtUserControl TIP: txtUserControl.findUser 用户不存在")
             return userControlErrValue["NoUser"]
         
@@ -202,7 +202,7 @@ class txtUserControl(userControl):
         '''查询用户好友是否存在'''
         controlDebug(u"txtUserControl txtUserControl.findUserFriend :"+ user+" "+friend)
         controlDebug(self.userFriends)
-        if not self.userFriends.has_key(user):
+        if self.userFriends.has_key(user)==False:
             controlDebug(u"txtUserControl TIP: txtUserControl.findUserFriend 用户不存在")
             return userControlErrValue["NoUser"]
         
@@ -223,11 +223,11 @@ class txtUserControl(userControl):
   
     def addUserFriend(self,user,friend):
         '''添加用户好友'''
-        if not self.userPassword.has_key(user):
+        if self.userPassword.has_key(user)==False:
             controlDebug(u"txtUserControl TIP: txtUserControl.addUserFriend 用户不存在")
             return userControlErrValue["NoUser"]
         
-        if not self.userPassword.has_key(friend):
+        if self.userPassword.has_key(friend)==False:
             controlDebug(u"txtUserControl TIP: txtUserControl.addUserFriend 好友用户不能存在")
             return userControlErrValue["NoFriendUser"]
             
@@ -251,7 +251,7 @@ class txtUserControl(userControl):
   
     def deleteUserFriend(self,user,friend):
         '''删除用户好友'''
-        if not self.userFriends.has_key(user):
+        if self.userFriends.has_key(user)==False:
             controlDebug(u"txtUserControl TIP: txtUserControl.deleteUserFriend 用户不存在")
             return userControlErrValue["NoUser"]
         
@@ -266,7 +266,7 @@ class txtUserControl(userControl):
 
         friendsList.remove(friend)
 
-        if len(friendsList):
+        if len(friendsList)!=0:
             self.userFriends[user]=friendsList[0]
             for item in friendsList[1:]:    
 #                print item    

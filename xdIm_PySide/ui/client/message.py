@@ -24,9 +24,9 @@ class messageWin(QMainWindow):
         message=self.ui.sendTextEdit.toPlainText()
         if message!="":
             self.ui.receTextEdit.append("you said: %s"%(message))
-            print self.parent()
-            print self.parent().connecting
-            print self.parent().connecting.protocolInstance
+#            print self.parent()
+#            print self.parent().connecting
+#            print self.parent().connecting.protocolInstance
             self.parent().connecting.protocolInstance.messageSend(self.friend,message)
             self.ui.sendTextEdit.clear()
             #还需要完成消息发送的调用

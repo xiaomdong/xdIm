@@ -9,7 +9,7 @@ class testTxtUserControlTestCase(unittest.TestCase):
 #        self.userControl1.userDataInit()
 #        self.saveUserFriends=self.userControl1.userFriends
 #        self.saveUserPassword=self.userControl1.userPassword
-    
+        
     def tearDown(self):
 #        self.userControl1.userFriends=self.saveUserFriends
 #        self.userControl1.userPassword=self.saveUserPassword
@@ -26,11 +26,11 @@ class testTxtUserControlTestCase(unittest.TestCase):
         if self.userControl1.findUser("cc")!=userControlErrValue["HaveUser"]:
             pass
         else:
-#            print "2222"
+            print "2222"
             result=self.userControl1.deleteUser("cc")
             self.assertEqual(result,userControlErrValue["OK"],"OK in deleteUser")
         
-#        print "3333"                 
+        print "3333"                 
         result=self.userControl1.addUser("cc", "apples")
         self.assertEqual(result,userControlErrValue["OK"],"OK in addUser")
         result=self.userControl1.deleteUser("cc")

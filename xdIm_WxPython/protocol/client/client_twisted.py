@@ -47,7 +47,7 @@ class xdClientProtocol(Protocol):
             #按utf-8编码发送数据，以传递中文，原因twisted不支持部分中文的unicode码
             self.transport.write(data.encode("utf-8"))
             try:
-                if self.messageCheck(data):
+                if self.messageCheck(data)!=0:
                     try:
                         sendData="you said: "+self.messageContents
                         frame.refreshReceMessage(self.destinationAddress,self.sourceAddress,sendData)
@@ -63,15 +63,15 @@ class xdClientProtocol(Protocol):
         protocolDebug( u"client_twisted received: %s"%(data))
         
         #如果连接标志为0，进行登陆校验
-        if not self.inused:
-            if not self.loginCheck(data):
+        if self.inused == 0 : 
+            if self.loginCheck(data)==0:
                 return 
         
-        if not self.getFriendsFlag:
+        if self.getFriendsFlag==0:
             self.getFriends(data)
             
         if self.inused == 1 :
-            if self.messageCheck(data):
+            if self.messageCheck(data)!=0:
                 try:
                     #显示在ui上的最终值
                     receiveData=self.sourceAddress+" said: "+self.messageContents

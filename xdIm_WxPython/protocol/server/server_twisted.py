@@ -80,7 +80,7 @@ class xdServerProtocol(basic.LineReceiver):
         protocolDebug( u"server_twisted ***dataSend " + data)
         if self.messageCheck(data)==1:
             if self.factory.clientConnect.has_key(self.destinationAddress):
-                if self.factory.clientConnect[self.destinationAddress]:
+                if self.factory.clientConnect[self.destinationAddress]!=0:
                     protocolDebug( u"server_twisted ***dataSend data: "+data+"\r\n")
                     self.factory.clientConnect[self.destinationAddress].transport.write(data.encode("utf-8"))
                 try:
@@ -112,8 +112,8 @@ class xdServerProtocol(basic.LineReceiver):
         
         #察看消息发送的目的地址和来源地址是否有效
         if self.factory.userflag == None:
-            if self.factory.user.has_key(self.sourceAddress):
-                if self.factory.user.has_key(self.destinationAddress):
+            if self.factory.user.has_key(self.sourceAddress)==True:
+                if self.factory.user.has_key(self.destinationAddress)==True:
                     return 1
         else:
             if self.factory.user.findUser(self.sourceAddress)== userControlErrValue["HaveUser"]:
@@ -134,7 +134,7 @@ class xdServerProtocol(basic.LineReceiver):
         self.connectpassword=user_and_password[1] #密码
         
         if self.factory.userflag ==None:
-            if self.factory.user.has_key(self.connectuser):
+            if self.factory.user.has_key(self.connectuser)==True:
                 pass
             else:
                 senddata=u"user name is not right\r\n"
@@ -206,7 +206,7 @@ class xdServerProtocol(basic.LineReceiver):
 #        print "received", repr(line)
         
         #如果未登陆，需要进行登陆检测
-        if not self.inused:
+        if self.inused==0:
             self.userCheck(line)
 
         #登陆了，开始消息接收

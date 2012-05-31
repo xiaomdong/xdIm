@@ -42,9 +42,9 @@ def createMessage(messageType="communion", *args):
             createCommunionMessage(comm, args[0], args[1], args[2], args[3])
         if messageType == "userPassword":
             createUserPasswordMessage(comm, args[0], args[1], args[2], args[3])
-        if messageType == "friendlist":
+        if messageType == "friendList":
             createFriendListMessage(comm, *args)  
-        if messageType == "Friend":
+        if messageType == "friend":
             createFriendMessage(comm,args[0],args[1])          
         return comm.SerializeToString()    
     else:
@@ -64,8 +64,8 @@ def parseMessage(messageType="communion", message=None):
     
 def userLoginReauest(src, dst, user, password):
     '''client在登录时发送的登录请求，携带用户名和密码'''
-    str = createMessage("userPassword", user, password,
-                         messageProtocol_pb2.userPassword.request,
+    str = createMessage("userPassword", user, password, \
+                         messageProtocol_pb2.userPassword.request, \
                          messageProtocol_pb2.userPassword.login)
     return createMessage("communion", src, dst, messageProtocol_pb2.communion.userPassword, str)
 
@@ -86,45 +86,45 @@ def userLoginFailed(src, dst, user, password):
 
 def createFriendOnline(user):
     '''生成用户在线信息'''
-    return createMessage("Friend", user,messageProtocol_pb2.Friend.online)
+    return createMessage("friend", user,messageProtocol_pb2.friend.online)
 
 def createFriendOutline(user):
     '''生成用户离线信息'''
-    return createMessage("Friend", user,messageProtocol_pb2.Friend.outline)
+    return createMessage("friend", user,messageProtocol_pb2.friend.outline)
 
 def parseFriend(message):
     if type(message)==unicode:
         message=message.encode("utf-8")
-    comm=parseMessage("Friend", message)
+    comm=parseMessage("friend", message)
     if comm!=None:
-        if comm.status==messageProtocol_pb2.Friend.online:
+        if comm.status==messageProtocol_pb2.friend.online:
             return [comm.user,1]
-        if comm.status==messageProtocol_pb2.Friend.outline:
+        if comm.status==messageProtocol_pb2.friend.outline:
             return [comm.user,0]
 
 def friendListRequest(src, dst, *args):
-    str = createMessage("friendlist", messageProtocol_pb2.friendlist.request, *args)
+    str = createMessage("friendList", messageProtocol_pb2.friendList.request, *args)
     return createMessage("communion", src, dst, messageProtocol_pb2.communion.friendList, str)
 
 def friendListresponsion(src, dst, *args):    
-    str = createMessage("friendlist", messageProtocol_pb2.friendlist.responsion, *args)
+    str = createMessage("friendList", messageProtocol_pb2.friendList.responsion, *args)
     return createMessage("communion", src, dst, messageProtocol_pb2.communion.friendList, str)
 
 def friendListActiveOnline(src, dst, user):
     str=createFriendOnline(user)
-    str1 = createMessage("friendlist", messageProtocol_pb2.friendlist.active, str)
+    str1 = createMessage("friendList", messageProtocol_pb2.friendList.active, str)
     return createMessage("communion", src, dst, messageProtocol_pb2.communion.friendList, str1)
 
 
 def friendListActiveOutline(src, dst, user):
     str=createFriendOutline(user)
-    str1 = createMessage("friendlist", messageProtocol_pb2.friendlist.active, str)
+    str1 = createMessage("friendList", messageProtocol_pb2.friendList.active, str)
     return createMessage("communion", src, dst, messageProtocol_pb2.communion.friendList, str1)
         
 def friendlistMessages(src, dst, *args):
     '''生成用户列表消息'''
-    print args
-    str = createMessage("friendlist", *args)
+#    print args
+    str = createMessage("friendList", *args)
     return createMessage("communion", src, dst, messageProtocol_pb2.communion.friendList, str)
 
     
@@ -163,14 +163,14 @@ def parseCommMessage(message):
         
         #解析用户列表消息
         if comm.messageFlag == messageProtocol_pb2.communion.friendList:
-            mes = parseMessage("friendlist", comm.message.encode("utf-8"))
+            mes = parseMessage("friendList", comm.message.encode("utf-8"))
             if mes == None:
                 return None
-            if mes.messageFlag == messageProtocol_pb2.friendlist.responsion:
+            if mes.messageFlag == messageProtocol_pb2.friendList.responsion:
                 return mes.friend
-            if mes.messageFlag == messageProtocol_pb2.friendlist.request:
+            if mes.messageFlag == messageProtocol_pb2.friendList.request:
                 return [src, dst]
-            if mes.messageFlag == messageProtocol_pb2.friendlist.active:
+            if mes.messageFlag == messageProtocol_pb2.friendList.active:
                 return mes.friend
     return None    
 

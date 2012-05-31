@@ -62,7 +62,8 @@ class xdClientProtocol(Protocol,object):
         '''连接时调用,发送用户和密码到服务器'''
         self.inused = 0 #连接服务器标志，用户和密码校验通过
         self.getFriendsFlag = 0 #获取用户列表标志
-        msg=userLoginReauest(self.factory.user, self.factory.user, self.factory.user, self.factory.password)
+#        msg=userLoginReauest(self.factory.user, self.factory.user, self.factory.user, self.factory.password)
+        msg=userLoginReauest(self.factory.user, "admin", self.factory.user, self.factory.password)        
         self.transport.write(msg)
         protocolDebug("connectionMade %s"%(msg))
 
@@ -78,16 +79,16 @@ class xdClientProtocol(Protocol,object):
         protocolDebug("client_twisted.dataReceived 1 received: %s" %(data))
         
         #如果连接标志为0，进行登陆校验
-        if not self.inused:
+        if self.inused == 0 : 
             self.loginCheck(data)
             return
         
-        if not self.getFriendsFlag:
+        if self.getFriendsFlag == 0:
             self.getFriends(data)
             return
         
         if self.inused == 1 :
-            if self.messageCheck(data):
+            if self.messageCheck(data) != 0:
                 try:
                     #显示在ui上的最终值
                     receiveData = self.sourceAddress + " said: " + self.messageContents
@@ -122,13 +123,13 @@ class xdClientProtocol(Protocol,object):
         '''登陆检查''' 
         result=parseCommMessage(message)
         protocolDebug(u"client_twisted.loginCheck result "+str(result))
-        if result:
+        if result==True:
             #用户密码检测成功后，发送用户friendlist请求
             msg=friendListRequest(self.factory.user, self.factory.user)
             self.transport.write(msg)
             self.inused = 1
             protocolDebug(u"client_twisted.loginCheck 1 ok")
-        if not result:
+        if result==False:
             self.inused = 0
             protocolDebug(u"client_twisted.loginCheck 2 err")
     
@@ -211,12 +212,12 @@ class xdClientFactory(ClientFactory):
             
     def runControlFunction(self, fun, data=None, *args):
         df = defer.Deferred()
-        print "runControl Function start"
+#        print "runControl Function start"
         if fun != None:
             df.addCallback(fun, data)
             df.callback(args)
-            print args
-        print "runControl Function end"
+#            print args
+#        print "runControl Function end"
 
 def handleConnectionLost(connector, reason):  
     protocolDebug(u'client_twisted client_twisted handleConnectionLost:', str(connector), reason.getErrorMessage())
@@ -281,8 +282,8 @@ def handleRefreshReceMessage(data, noUse):
     '''handleRefreshReceMessage'''
     protocolDebug("client_twisted handleRefreshReceMessage")
     noUse = noUse
-    print data
-    print noUse
+#    print data
+#    print noUse
     try:    
         frame.refreshReceMessage(data[0], data[1], data[2])
         #pylint: disable=W0702

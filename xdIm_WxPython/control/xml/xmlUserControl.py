@@ -39,7 +39,7 @@ class xmlUserControl(txtUserControl):
             
             userFriendsNode=Node.getElementsByTagName('tns:friends')
             
-            if len(userFriendsNode):
+            if len(userFriendsNode)!=0:
                 userFriends=userFriendsNode[0].getElementsByTagName('tns:name')
                 friendstr= userFriends[0].childNodes[0].nodeValue
                 for friend in userFriends[1:]:
@@ -55,7 +55,7 @@ class xmlUserControl(txtUserControl):
         return userControlErrValue["OK"]      
     
     def userDataSave(self):
-        if not self.userDataModifiedFlag:
+        if self.userDataModifiedFlag==False:
             controlDebug(u"xmlUserControl TIP: xmlUserControl.userDataSave 用户数据没有修改，不需要保存")
             return userControlErrValue["ControlDataNoModified"]
         
@@ -67,7 +67,7 @@ class xmlUserControl(txtUserControl):
         self.xmldoc.writexml(self.fileSlot)
         
         self.fileSlot.close()
-        self.userDataModifiedFlag=True
+        self.userDataModifiedFlag=False
         controlDebug(u"xmlUserControl OK : xmlUserControl.userDataSave")
         return userControlErrValue["OK"]
     

@@ -27,6 +27,11 @@ class xmlUserControl(txtUserControl):
         '''
                             打开用户配置文件，初始化用户配置数据
         '''
+        
+        if self.userDataModifiedFlag == True:
+            controlDebug(u"xmlUserControl TIP: xmlUserControl.userDataInit 用户数据已经被修改，不能初始化用户数据")
+            return userControlErrValue["ControlDataModified"]
+                
         self.xmldoc = minidom.parse(self.fileName)
         userNodes = self.xmldoc.getElementsByTagName('tns:user')
         for Node in userNodes:
@@ -39,7 +44,7 @@ class xmlUserControl(txtUserControl):
             
             userFriendsNode = Node.getElementsByTagName('tns:friends')
             
-            if len(userFriendsNode):
+            if len(userFriendsNode) != 0:
                 userFriends = userFriendsNode[0].getElementsByTagName('tns:name')
                 friendstr = userFriends[0].childNodes[0].nodeValue
                 for friend in userFriends[1:]:
@@ -55,7 +60,7 @@ class xmlUserControl(txtUserControl):
         return userControlErrValue["OK"]      
     
     def userDataSave(self):
-        if not self.userDataModifiedFlag:
+        if self.userDataModifiedFlag == False:
             controlDebug(u"xmlUserControl TIP: xmlUserControl.userDataSave 用户数据没有修改，不需要保存")
             return userControlErrValue["ControlDataNoModified"]
         
@@ -67,7 +72,7 @@ class xmlUserControl(txtUserControl):
         self.xmldoc.writexml(self.fileSlot)
         
         self.fileSlot.close()
-        self.userDataModifiedFlag = True
+        self.userDataModifiedFlag = False
         controlDebug(u"xmlUserControl OK : xmlUserControl.userDataSave")
         return userControlErrValue["OK"]
     

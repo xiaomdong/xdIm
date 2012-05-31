@@ -92,12 +92,12 @@ class testTxtUserControlTestCase(unittest.TestCase):
                
 def suite():
     suite=unittest.TestSuite()
-    suite.addTest(testTxtUserControlTestCase('testAddDeleteuser'))
+#    suite.addTest(testTxtUserControlTestCase('testAddDeleteuser'))
     suite.addTest(testTxtUserControlTestCase('testUserDataInit'))
-    suite.addTest(testTxtUserControlTestCase('testAddDeleteUserFriend'))
-    suite.addTest(testTxtUserControlTestCase('testcheckUser'))
-    suite.addTest(testTxtUserControlTestCase('testUserDataSave'))
-    suite.addTest(testTxtUserControlTestCase('testUserDataSaveAs'))
+#    suite.addTest(testTxtUserControlTestCase('testAddDeleteUserFriend'))
+#    suite.addTest(testTxtUserControlTestCase('testcheckUser'))
+#    suite.addTest(testTxtUserControlTestCase('testUserDataSave'))
+#    suite.addTest(testTxtUserControlTestCase('testUserDataSaveAs'))
     return suite
 
 #def suite():

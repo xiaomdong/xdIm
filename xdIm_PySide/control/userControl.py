@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-from debug import *
+from debug import controlDebug,classDecorator
 
 #err值定义
 userControlErrValue={
@@ -31,10 +31,13 @@ userControlErrValue={
 #        for arg in args:
 #            print arg
         
-class userControl():
+class userControl(object):
     '''用户管理基类'''
-    
+    __metaclass__ = classDecorator
     def __init__(self):
+        pass  
+        
+    def userDataInit(self):
         pass
     
     def addUser(self,user,password):
@@ -88,3 +91,10 @@ class userControl():
     def getUserLogin(self,user):
         '''检查用户是否登陆'''
         pass
+    
+    def userDataSave(self):
+        pass
+
+    def userDataSaveAs(self):
+        pass
+    

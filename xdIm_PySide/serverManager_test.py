@@ -15,6 +15,7 @@ from PySide.QtTest import *
 class testQString(QObject):
     def initTestCase(self):
         print "initTestCase"
+        
     
     def clearupTestCase(self):
         print "clearupTestCase"

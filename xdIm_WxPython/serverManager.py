@@ -348,7 +348,7 @@ class serverManager(serverManagerUi):
         uiDebug( "serverManagerUi OnTogglebutton_serverStartButton()")
         print self.serverStartButton.GetValue()
         
-        if not self.serverStartButton.GetValue():
+        if self.serverStartButton.GetValue()==False:
             self.serverStartButton.SetValue(True)
             return
         
@@ -365,7 +365,7 @@ class serverManager(serverManagerUi):
         # Replace with event handler code
         uiDebug( "serverManagerUi OnTogglebutton_serverStopButton()")
         
-        if not self.serverStopButton.GetValue():
+        if self.serverStopButton.GetValue()==False:
             self.serverStopButton.SetValue(True)
             return
         
